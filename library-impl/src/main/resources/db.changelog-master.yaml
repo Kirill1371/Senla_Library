@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: create_tables.yaml
+  - include:
+      file: 002-insert-sample-data.yaml

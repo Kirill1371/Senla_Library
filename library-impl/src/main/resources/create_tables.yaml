@@ -1,0 +1,71 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: system
+      changes:
+        - createTable:
+            tableName: tenant
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+
+        - createTable:
+            tableName: staff
+            columns:
+              - column: { name: id, type: BIGINT, autoIncrement: true, constraints: { primaryKey: true } }
+              - column: { name: name, type: VARCHAR(255) }
+              - column: { name: password, type: VARCHAR(255) }
+              - column: { name: email, type: VARCHAR(255), constraints: { unique: true } }
+              - column: { name: role, type: VARCHAR(255) }
+              - column: { name: tenant_id, type: BIGINT, constraints: { nullable: false, foreignKeyName: fk_staff_tenant, references: tenant(id) } }
+
+        - createTable:
+            tableName: authors
+            columns:
+              - column: { name: id, type: BIGINT, autoIncrement: true, constraints: { primaryKey: true } }
+              - column: { name: name, type: VARCHAR(255) }
+              - column: { name: birth_day, type: DATE }
+              - column: { name: country, type: VARCHAR(255) }
+              - column: { name: staff_id, type: BIGINT, constraints: { foreignKeyName: fk_authors_staff, references: staff(id) } }
+
+        - createTable:
+            tableName: categories
+            columns:
+              - column: { name: id, type: BIGINT, autoIncrement: true, constraints: { primaryKey: true } }
+              - column: { name: name, type: VARCHAR(255) }
+              - column: { name: parent_id, type: BIGINT, constraints: { nullable: true, foreignKeyName: fk_categories_parent, references: categories(id) } }
+              - column: { name: staff_id, type: BIGINT, constraints: { foreignKeyName: fk_categories_staff, references: staff(id) } }
+
+        - createTable:
+            tableName: reader
+            columns:
+              - column: { name: id, type: BIGINT, autoIncrement: true, constraints: { primaryKey: true } }
+              - column: { name: name, type: VARCHAR(255) }
+              - column: { name: password, type: VARCHAR(255) }
+
+        - createTable:
+            tableName: books
+            columns:
+              - column: { name: id, type: BIGINT, autoIncrement: true, constraints: { primaryKey: true } }
+              - column: { name: title, type: VARCHAR(255) }
+              - column: { name: author_id, type: BIGINT, constraints: { foreignKeyName: fk_books_author, references: authors(id) } }
+              - column: { name: category_id, type: BIGINT, constraints: { foreignKeyName: fk_books_category, references: categories(id) } }
+              - column: { name: publish_year, type: INT }
+              - column: { name: available, type: BOOLEAN }
+
+        - createTable:
+            tableName: book_loans
+            columns:
+              - column: { name: id, type: BIGINT, autoIncrement: true, constraints: { primaryKey: true } }
+              - column: { name: reader_id, type: BIGINT, constraints: { foreignKeyName: fk_loans_reader, references: reader(id) } }
+              - column: { name: book_id, type: BIGINT, constraints: { foreignKeyName: fk_loans_book, references: books(id) } }
+              - column: { name: loan_date, type: DATE }
+              - column: { name: due_date, type: DATE }
+              - column: { name: return_date, type: DATE }

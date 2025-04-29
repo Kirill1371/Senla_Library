@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: system
+      changes:
+        - insert:
+            tableName: tenant
+            columns:
+              - column: { name: id, valueNumeric: 1 }
+              - column: { name: name, value: "TestTenant" }
+        - insert:
+            tableName: staff
+            columns:
+              - column: { name: id, valueNumeric: 1 }
+              - column: { name: tenant_id, valueNumeric: 1 }
+              - column: { name: email, value: "admin@example.com" }
+              - column: { name: name, value: "Admin User" }
+              - column: { name: password, value: "$2a$10$7K0UO8s8Y1nh/..." } # твой bcrypt-пароль
+              - column: { name: role, value: "ADMIN" }
+        - insert:
+            tableName: reader
+            columns:
+              - column: { name: id, valueNumeric: 1 }
+              - column: { name: name, value: "Reader One" }
+              - column: { name: password, value: "readerpassword" }
+        - insert:
+            tableName: authors
+            columns:
+              - column: { name: birth_day, valueDate: "1980-05-12" }
+              - column: { name: id, valueNumeric: 1 }
+              - column: { name: staff_id, valueNumeric: 1 }
+              - column: { name: country, value: "USA" }
+              - column: { name: name, value: "Author One" }
+        - insert:
+            tableName: categories
+            columns:
+              - column: { name: id, valueNumeric: 1 }
+              - column: { name: parent_id, value: null }
+              - column: { name: staff_id, valueNumeric: 1 }
+              - column: { name: name, value: "Fiction" }
+        - insert:
+            tableName: books
+            columns:
+              - column: { name: available, valueBoolean: true }
+              - column: { name: publish_year, valueNumeric: 2001 }
+              - column: { name: author_id, valueNumeric: 1 }
+              - column: { name: category_id, valueNumeric: 1 }
+              - column: { name: id, valueNumeric: 1 }
+              - column: { name: title, value: "Book Title One" }
+        - insert:
+            tableName: book_loans
+            columns:
+              - column: { name: due_date, valueDate: "2025-05-20" }
+              - column: { name: loan_date, valueDate: "2025-04-20" }
+              - column: { name: return_date, valueDate: "2025-05-15" }
+              - column: { name: book_id, valueNumeric: 1 }
+              - column: { name: id, valueNumeric: 1 }
+              - column: { name: reader_id, valueNumeric: 1 }
