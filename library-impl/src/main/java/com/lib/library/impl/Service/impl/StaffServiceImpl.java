@@ -17,14 +17,6 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class StaffServiceImpl implements StaffService {
-//    private final StaffRepository repository;
-//    private final StaffMapper mapper;
-//
-//    @Override
-//    public StaffDto create(StaffDto dto) {
-//        return mapper.toDto(repository.save(mapper.toEntity(dto)));
-//    }
-
     private final StaffRepository repository;
     private final StaffMapper mapper;
     private final TenantRepository tenantRepository; // добавьте этот репозиторий

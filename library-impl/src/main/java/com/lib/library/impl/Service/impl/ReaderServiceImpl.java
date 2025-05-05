@@ -20,11 +20,6 @@ public class ReaderServiceImpl implements ReaderService {
     private final ReaderMapper mapper;
     private final PasswordEncoder passwordEncoder;
 
-//    @Override
-//    public ReaderDto create(ReaderDto dto) {
-//        return mapper.toDto(repository.save(mapper.toEntity(dto)));
-//    }
-
     @Override
     public ReaderDto create(ReaderDto dto) {
         Reader reader = mapper.toEntity(dto);
@@ -32,8 +27,6 @@ public class ReaderServiceImpl implements ReaderService {
         reader.setPassword(encodedPassword);
         return mapper.toDto(repository.save(reader));
     }
-
-
 
     @Override
     public ReaderDto getById(Long id) {

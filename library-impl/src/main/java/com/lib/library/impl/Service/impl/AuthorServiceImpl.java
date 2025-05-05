@@ -27,34 +27,6 @@ public class AuthorServiceImpl implements AuthorService {
         return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
 
-//    @Override
-//    public AuthorDto create(AuthorDto dto) {
-//        Author author = mapper.toEntity(dto);
-//        author.setId(null); // Явно сбрасываем ID перед сохранением
-//
-//        Staff staff = staffRepository.findById(dto.getStaffId())
-//                .orElseThrow(() -> new RuntimeException("Tenant not found with id: " + dto.getStaffId()));
-//        author.setStaff(staff);
-//
-//        return mapper.toDto(repository.save(author));
-//    }
-
-
-//    @Override
-//    public AuthorDto create(AuthorDto dto) {
-//        Author author = mapper.toEntity(dto);
-//        author.setId(null); // Явно сбрасываем ID перед сохранением
-//
-//        if (dto.getStaffId() != null) {
-//            Staff staff = staffRepository.findById(dto.getStaffId())
-//                    .orElseThrow(() -> new RuntimeException("Staff not found with id: " + dto.getStaffId()));
-//            author.setStaff(staff);
-//        }
-//
-//        return mapper.toDto(repository.save(author));
-//    }
-
-
     @Override
     public AuthorDto getById(Long id) {
         return repository.findById(id).map(mapper::toDto).orElse(null);
@@ -77,7 +49,7 @@ public class AuthorServiceImpl implements AuthorService {
                     .orElseThrow(() -> new EntityNotFoundException("Staff not found with id: " + dto.getStaffId()));
             entity.setStaff(staff);
         } else {
-            entity.setStaff(null); // или оставляем как есть, в зависимости от логики
+            entity.setStaff(null);
         }
 
         return mapper.toDto(repository.save(entity));
