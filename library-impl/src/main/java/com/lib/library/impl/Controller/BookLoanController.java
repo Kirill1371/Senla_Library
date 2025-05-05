@@ -8,15 +8,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/book-loans")
+@RequestMapping("/api/bookloans")
 @RequiredArgsConstructor
 public class BookLoanController {
 
     private final BookLoanService service;
 
-//    public BookLoanController(BookLoanService service) {
-//        this.service = service;
-//    }
     @PostMapping
     public BookLoanDto create(@RequestBody BookLoanDto dto) {
         return service.create(dto);

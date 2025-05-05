@@ -8,6 +8,10 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface AuthorMapper {
 
+    @Mapping(target = "staffId", source = "staff.id")
     AuthorDto toDto(Author author);
+
+    //@Mapping(target = "staff", ignore = true)
+    @Mapping(target = "staff.id", source = "staffId")
     Author toEntity(AuthorDto dto);
 }

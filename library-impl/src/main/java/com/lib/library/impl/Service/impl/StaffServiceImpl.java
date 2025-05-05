@@ -2,10 +2,13 @@ package com.lib.library.impl.Service.impl;
 
 import com.lib.library.api.dto.StaffDto;
 import com.lib.library.db.entity.Staff;
+import com.lib.library.db.entity.Tenant;
+import com.lib.library.impl.Repository.TenantRepository;
 import com.lib.library.impl.mapper.StaffMapper;
 import com.lib.library.impl.Repository.StaffRepository;
 import com.lib.library.impl.Service.StaffService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,12 +17,31 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class StaffServiceImpl implements StaffService {
+//    private final StaffRepository repository;
+//    private final StaffMapper mapper;
+//
+//    @Override
+//    public StaffDto create(StaffDto dto) {
+//        return mapper.toDto(repository.save(mapper.toEntity(dto)));
+//    }
+
     private final StaffRepository repository;
     private final StaffMapper mapper;
+    private final TenantRepository tenantRepository; // добавьте этот репозиторий
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public StaffDto create(StaffDto dto) {
-        return mapper.toDto(repository.save(mapper.toEntity(dto)));
+        Staff staff = mapper.toEntity(dto);
+
+        String encodedPassword = passwordEncoder.encode(dto.getPassword());
+        staff.setPassword(encodedPassword);
+        // Находим tenant по ID и устанавливаем его для staff
+        Tenant tenant = tenantRepository.findById(dto.getTenantId())
+                .orElseThrow(() -> new RuntimeException("Tenant not found with id: " + dto.getTenantId()));
+        staff.setTenant(tenant);
+
+        return mapper.toDto(repository.save(staff));
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.lib.library.impl.mapper.ReaderMapper;
 import com.lib.library.impl.Repository.ReaderRepository;
 import com.lib.library.impl.Service.ReaderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +18,22 @@ import java.util.stream.Collectors;
 public class ReaderServiceImpl implements ReaderService {
     private final ReaderRepository repository;
     private final ReaderMapper mapper;
+    private final PasswordEncoder passwordEncoder;
+
+//    @Override
+//    public ReaderDto create(ReaderDto dto) {
+//        return mapper.toDto(repository.save(mapper.toEntity(dto)));
+//    }
 
     @Override
     public ReaderDto create(ReaderDto dto) {
-        return mapper.toDto(repository.save(mapper.toEntity(dto)));
+        Reader reader = mapper.toEntity(dto);
+        String encodedPassword = passwordEncoder.encode(dto.getPassword());
+        reader.setPassword(encodedPassword);
+        return mapper.toDto(repository.save(reader));
     }
+
+
 
     @Override
     public ReaderDto getById(Long id) {

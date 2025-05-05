@@ -15,6 +15,7 @@ public class AuthorController {
 
     @PostMapping
     public AuthorDto create(@RequestBody AuthorDto dto) {
+        System.out.println("Received DTO: " + dto);
         return service.create(dto);
     }
 
@@ -30,6 +31,7 @@ public class AuthorController {
 
     @PutMapping("/{id}")
     public AuthorDto update(@PathVariable Long id, @RequestBody AuthorDto dto) {
+        System.out.println("Received DTO: " + dto);
         return service.update(id, dto);
     }
 

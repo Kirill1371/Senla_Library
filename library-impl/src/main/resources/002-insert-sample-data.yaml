@@ -56,3 +56,56 @@ databaseChangeLog:
               - column: { name: book_id, valueNumeric: 1 }
               - column: { name: id, valueNumeric: 1 }
               - column: { name: reader_id, valueNumeric: 1 }
+  - changeSet:
+      id: 3
+      author: system
+      changes:
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: "Literature"
+              - column:
+                  name: staff_id
+                  valueNumeric: 1
+            where: "NOT EXISTS (SELECT 1 FROM categories WHERE id=1)"
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: "Fiction"
+              - column:
+                  name: parent_id
+                  valueNumeric: 1
+              - column:
+                  name: staff_id
+                  valueNumeric: 1
+            where: "NOT EXISTS (SELECT 1 FROM categories WHERE id=1)"
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: "Science Fiction"
+              - column:
+                  name: parent_id
+                  valueNumeric: 2
+              - column:
+                  name: staff_id
+                  valueNumeric: 1
+            where: "NOT EXISTS (SELECT 1 FROM categories WHERE id=1)"
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: "Fantasy"
+              - column:
+                  name: parent_id
+                  valueNumeric: 2
+              - column:
+                  name: staff_id
+                  valueNumeric: 1
+          where: "NOT EXISTS (SELECT 1 FROM categories WHERE id=1)"
