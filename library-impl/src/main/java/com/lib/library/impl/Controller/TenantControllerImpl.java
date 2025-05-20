@@ -1,40 +1,41 @@
 package com.lib.library.impl.Controller;
 
+import com.lib.library.api.controller.TenantController;
 import com.lib.library.api.dto.TenantDto;
 import com.lib.library.impl.Service.TenantService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/tenants")
 @RequiredArgsConstructor
-public class TenantController {
+public class TenantControllerImpl implements TenantController {
+
     private final TenantService service;
 
-    @PostMapping
-    public TenantDto create(@RequestBody TenantDto dto) {
+    @Override
+    public TenantDto create(TenantDto dto) {
         return service.create(dto);
     }
 
-    @GetMapping("/{id}")
-    public TenantDto getById(@PathVariable Long id) {
+    @Override
+    public TenantDto getById(Long id) {
         return service.getById(id);
     }
 
-    @GetMapping
+    @Override
     public List<TenantDto> getAll() {
         return service.getAll();
     }
 
-    @PutMapping("/{id}")
-    public TenantDto update(@PathVariable Long id, @RequestBody TenantDto dto) {
+    @Override
+    public TenantDto update(Long id, TenantDto dto) {
         return service.update(id, dto);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    @Override
+    public void delete(Long id) {
         service.delete(id);
     }
 }

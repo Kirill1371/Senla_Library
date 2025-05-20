@@ -4,6 +4,13 @@ import com.lib.library.db.entity.Tenant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface TenantRepository extends JpaRepository<Tenant, Long> {
+import java.util.List;
+import java.util.Optional;
+
+public interface TenantRepository {
+    Tenant save(Tenant tenant);
+    Optional<Tenant> findById(Long id);
+    List<Tenant> findAll();
+    Tenant update(Tenant tenant);
+    void deleteById(Long id);
 }

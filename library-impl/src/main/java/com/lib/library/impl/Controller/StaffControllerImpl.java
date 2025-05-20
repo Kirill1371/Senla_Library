@@ -1,40 +1,41 @@
 package com.lib.library.impl.Controller;
 
+import com.lib.library.api.controller.StaffController;
 import com.lib.library.api.dto.StaffDto;
 import com.lib.library.impl.Service.StaffService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/staff")
 @RequiredArgsConstructor
-public class StaffController {
+public class StaffControllerImpl implements StaffController {
+
     private final StaffService service;
 
-    @PostMapping
-    public StaffDto create(@RequestBody StaffDto dto) {
+    @Override
+    public StaffDto create(StaffDto dto) {
         return service.create(dto);
     }
 
-    @GetMapping("/{id}")
-    public StaffDto getById(@PathVariable Long id) {
+    @Override
+    public StaffDto getById(Long id) {
         return service.getById(id);
     }
 
-    @GetMapping
+    @Override
     public List<StaffDto> getAll() {
         return service.getAll();
     }
 
-    @PutMapping("/{id}")
-    public StaffDto update(@PathVariable Long id, @RequestBody StaffDto dto) {
+    @Override
+    public StaffDto update(Long id, StaffDto dto) {
         return service.update(id, dto);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    @Override
+    public void delete(Long id) {
         service.delete(id);
     }
 }

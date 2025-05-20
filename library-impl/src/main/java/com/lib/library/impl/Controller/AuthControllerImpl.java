@@ -1,27 +1,27 @@
 package com.lib.library.impl.Controller;
 
+import com.lib.library.api.controller.AuthController;
 import com.lib.library.api.dto.AuthRequestDto;
 import com.lib.library.api.dto.AuthResponseDto;
 import com.lib.library.api.dto.RegisterRequestDto;
 import com.lib.library.impl.Service.impl.AuthenticationServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/auth")
 @RequiredArgsConstructor
-public class AuthController {
+public class AuthControllerImpl implements AuthController {
 
     private final AuthenticationServiceImpl authenticationService;
 
-    @PostMapping("/login")
-    public ResponseEntity<AuthResponseDto> login(@RequestBody AuthRequestDto request) {
+    @Override
+    public ResponseEntity<AuthResponseDto> login(AuthRequestDto request) {
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<Void> register(@RequestBody RegisterRequestDto request) {
+    @Override
+    public ResponseEntity<Void> register(RegisterRequestDto request) {
         authenticationService.register(request);
         return ResponseEntity.ok().build();
     }

@@ -6,14 +6,16 @@ import com.lib.library.db.entity.BookLoan;
 import com.lib.library.impl.mapper.BookLoanMapper;
 import com.lib.library.impl.Repository.BookLoanRepository;
 import com.lib.library.impl.Service.BookLoanService;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
+@Valid
 @RequiredArgsConstructor
 public class BookLoanServiceImpl implements BookLoanService {
     private final BookLoanRepository repository;
@@ -25,13 +27,21 @@ public class BookLoanServiceImpl implements BookLoanService {
         BookLoan bookLoan = mapper.toEntity(dto);
         BookLoan savedLoan = repository.save(bookLoan);
 
-        // Обновляем статус книги на "недоступна"
         BookDto bookDto = bookService.findById(dto.getBookId());
         bookDto.setAvailable(false);
         bookService.update(bookDto.getId(), bookDto);
 
-        return mapper.toDto(repository.save(mapper.toEntity(dto)));
+        return mapper.toDto(savedLoan); // <-- исправлено
     }
+
+    @Override
+    public List<BookLoanDto> findByReaderId(Long readerId) {
+        return repository.findByReaderId(readerId).stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+
 
     @Override
     public BookLoanDto getById(Long id) {
@@ -45,45 +55,34 @@ public class BookLoanServiceImpl implements BookLoanService {
 
     @Override
     public BookLoanDto update(Long id, BookLoanDto dto) {
-//        BookLoan entity = repository.findById(id).orElseThrow();
-//        entity.setLoanDate(dto.getLoanDate());
-//        entity.setDueDate(dto.getDueDate());
-//        entity.setReturnDate(dto.getReturnDate());
+        BookLoan existingLoan = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Book loan not found: " + id));
 
-        BookLoan entity = repository.findById(id).orElseThrow();
+        // Обновляем данные
+        mapper.updateBookLoanFromDto(dto, existingLoan);
+        existingLoan.setReturnDate(dto.getReturnDate()); // важно — даже если null
 
-        // Проверяем, изменилась ли дата возврата
-        boolean returnDateChanged = !Objects.equals(entity.getReturnDate(), dto.getReturnDate());
+        BookLoan updatedLoan = repository.update(existingLoan);
 
-        entity.setLoanDate(dto.getLoanDate());
-        entity.setDueDate(dto.getDueDate());
-        entity.setReturnDate(dto.getReturnDate());
-        BookLoan updatedLoan = repository.save(entity);
-
-        // Если дата возврата изменилась и теперь не null, значит книга возвращена
-        if (returnDateChanged && dto.getReturnDate() != null) {
-            BookDto bookDto = bookService.findById(dto.getBookId());
+        // Если есть returnDate — книга вернулась, делаем available = true
+        if (dto.getReturnDate() != null) {
+            BookDto bookDto = bookService.findById(existingLoan.getBook().getId());
             bookDto.setAvailable(true);
             bookService.update(bookDto.getId(), bookDto);
         }
 
-
-        return mapper.toDto(repository.save(entity));
+        return mapper.toDto(updatedLoan);
     }
+
 
     @Override
     public void delete(Long id) {
         BookLoan loan = repository.findById(id).orElseThrow();
-
-        // Если книга не была возвращена (returnDate == null),
-        // при удалении задолженности делаем книгу доступной
         if (loan.getReturnDate() == null) {
             BookDto bookDto = bookService.findById(loan.getBook().getId());
             bookDto.setAvailable(true);
             bookService.update(bookDto.getId(), bookDto);
         }
-
-
         repository.deleteById(id);
     }
 }

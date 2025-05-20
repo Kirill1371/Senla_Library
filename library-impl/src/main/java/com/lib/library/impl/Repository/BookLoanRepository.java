@@ -1,10 +1,14 @@
 package com.lib.library.impl.Repository;
 
 import com.lib.library.db.entity.BookLoan;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
+import java.util.Optional;
 
-@Repository
-public interface BookLoanRepository extends JpaRepository<BookLoan, Long> {
+public interface BookLoanRepository {
+    BookLoan save(BookLoan bookLoan);
+    List<BookLoan> findByReaderId(Long readerId);
+    Optional<BookLoan> findById(Long id);
+    List<BookLoan> findAll();
+    BookLoan update(BookLoan bookLoan);
+    void deleteById(Long id);
 }
-

@@ -7,6 +7,7 @@ import com.lib.library.impl.Repository.TenantRepository;
 import com.lib.library.impl.mapper.StaffMapper;
 import com.lib.library.impl.Repository.StaffRepository;
 import com.lib.library.impl.Service.StaffService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,14 +18,6 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class StaffServiceImpl implements StaffService {
-//    private final StaffRepository repository;
-//    private final StaffMapper mapper;
-//
-//    @Override
-//    public StaffDto create(StaffDto dto) {
-//        return mapper.toDto(repository.save(mapper.toEntity(dto)));
-//    }
-
     private final StaffRepository repository;
     private final StaffMapper mapper;
     private final TenantRepository tenantRepository; // добавьте этот репозиторий
@@ -55,14 +48,18 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public StaffDto update(Long id, StaffDto dto) {
+    public StaffDto update(Long id, StaffDto staffDto) {
         Staff entity = repository.findById(id).orElseThrow();
-        entity.setName(dto.getName());
-        return mapper.toDto(repository.save(entity));
+        String encodedPassword = passwordEncoder.encode(staffDto.getPassword());
+        staffDto.setPassword(encodedPassword);
+        mapper.updateStaffFromDto(staffDto, entity);
+        return mapper.toDto(repository.update(entity));
     }
 
     @Override
     public void delete(Long id) {
+        repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Don`t found" + id));
         repository.deleteById(id);
     }
 }

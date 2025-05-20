@@ -37,7 +37,7 @@ public class TenantServiceImpl implements TenantService {
     public TenantDto update(Long id, TenantDto dto) {
         Tenant entity = repository.findById(id).orElseThrow();
         entity.setName(dto.getName());
-        return mapper.toDto(repository.save(entity));
+        return mapper.toDto(repository.update(entity));
     }
 
     @Override

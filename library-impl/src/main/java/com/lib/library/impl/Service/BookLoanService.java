@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface BookLoanService {
     BookLoanDto create(BookLoanDto dto);
+    List<BookLoanDto> findByReaderId(Long readerId);
     BookLoanDto getById(Long id);
     List<BookLoanDto> getAll();
     BookLoanDto update(Long id, BookLoanDto dto);

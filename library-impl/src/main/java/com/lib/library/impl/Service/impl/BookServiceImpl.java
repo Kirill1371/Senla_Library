@@ -6,12 +6,14 @@ import com.lib.library.impl.mapper.BookMapper;
 import com.lib.library.impl.Repository.BookRepository;
 import com.lib.library.impl.Service.BookService;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Valid
 @Service
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
@@ -44,18 +46,16 @@ public class BookServiceImpl implements BookService {
         Book existingBook = bookRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Book not found: " + id));
 
-        if (bookDto.getTitle() != null) {
-            existingBook.setTitle(bookDto.getTitle());
-        }
+        bookMapper.updateEntityFromDto(bookDto, existingBook);
 
-        Book updated = bookMapper.toEntity(bookDto);
-        updated.setId(existingBook.getId());
-
-        return bookMapper.toDto(bookRepository.save(updated));
+        Book updatedBook = bookRepository.update(existingBook);
+        return bookMapper.toDto(updatedBook);
     }
 
     @Override
     public void delete(Long id) {
+        bookRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Book not found" + id));
         bookRepository.deleteById(id);
     }
 }

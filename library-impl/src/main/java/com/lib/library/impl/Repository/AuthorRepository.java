@@ -1,9 +1,14 @@
 package com.lib.library.impl.Repository;
 
 import com.lib.library.db.entity.Author;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface AuthorRepository extends JpaRepository<Author, Long> {
+import java.util.List;
+import java.util.Optional;
+
+public interface AuthorRepository {
+    Author save(Author author);
+    Optional<Author> findById(Long id);
+    List<Author> findAll();
+    void deleteById(Long id);
+    Author update(Author author);
 }

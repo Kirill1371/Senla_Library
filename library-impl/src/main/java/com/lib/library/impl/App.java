@@ -1,18 +1,3 @@
-//package com.lib;
-//
-///**
-// * Hello world!
-// *
-// */
-//public class App
-//{
-//    public static void main( String[] args )
-//    {
-//        System.out.println( "Hello World!" );
-//    }
-//}
-
-
 package com.lib.library.impl;
 
 import org.springframework.boot.SpringApplication;
@@ -27,7 +12,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         "com.lib.library.impl.Config",
         "com.lib.library.impl.Service",
         "com.lib.library.impl.Repository",
-        "com.lib.library.impl.mapper" // ← ДОБАВИТЬ
+        "com.lib.library.impl.mapper", // ← ДОБАВИТЬ
+        "com.lib.library.impl.Exception"
 })
 @EnableJpaRepositories(basePackages = "com.lib.library.impl.repository")
 @EntityScan(basePackages = "com.lib.library.db.entity")

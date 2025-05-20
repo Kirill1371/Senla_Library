@@ -1,21 +1,20 @@
-//package com.lib.library.impl.Repository;
-//
-//import com.lib.library.db.entity.Category;
-//import org.springframework.data.jpa.repository.JpaRepository;
-//import org.springframework.stereotype.Repository;
-//
-//@Repository
-//public interface CategoryRepository extends JpaRepository<Category, Long> {
-//}
-
-
 package com.lib.library.impl.Repository;
 
 import com.lib.library.db.entity.Category;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface CategoryRepository extends JpaRepository<Category, Long> {
+public interface CategoryRepository {
+    Category save(Category category);
+
+    Optional<Category> findById(Long id);
+
+    List<Category> findAll();
+
+    Category update(Category category);
+
+    void deleteById(Long id);
+
     List<Category> findByParentCategoryId(Long parentId);
 }

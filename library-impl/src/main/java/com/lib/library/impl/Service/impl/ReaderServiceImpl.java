@@ -5,6 +5,7 @@ import com.lib.library.db.entity.Reader;
 import com.lib.library.impl.mapper.ReaderMapper;
 import com.lib.library.impl.Repository.ReaderRepository;
 import com.lib.library.impl.Service.ReaderService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,11 +21,6 @@ public class ReaderServiceImpl implements ReaderService {
     private final ReaderMapper mapper;
     private final PasswordEncoder passwordEncoder;
 
-//    @Override
-//    public ReaderDto create(ReaderDto dto) {
-//        return mapper.toDto(repository.save(mapper.toEntity(dto)));
-//    }
-
     @Override
     public ReaderDto create(ReaderDto dto) {
         Reader reader = mapper.toEntity(dto);
@@ -32,8 +28,6 @@ public class ReaderServiceImpl implements ReaderService {
         reader.setPassword(encodedPassword);
         return mapper.toDto(repository.save(reader));
     }
-
-
 
     @Override
     public ReaderDto getById(Long id) {
@@ -52,11 +46,13 @@ public class ReaderServiceImpl implements ReaderService {
         Reader entity = repository.findById(id).orElseThrow();
         entity.setName(dto.getName());
         entity.setPassword(dto.getPassword());
-        return mapper.toDto(repository.save(entity));
+        return mapper.toDto(repository.update(entity));
     }
 
     @Override
     public void delete(Long id) {
+        repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Id don`t found " + id));
         repository.deleteById(id);
     }
 }

@@ -2,8 +2,7 @@ package com.lib.library.impl.mapper;
 
 import com.lib.library.api.dto.BookLoanDto;
 import com.lib.library.db.entity.BookLoan;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface BookLoanMapper {
@@ -16,4 +15,8 @@ public interface BookLoanMapper {
     @Mapping(target = "reader.id", source = "readerId")
     @Mapping(target = "book.id", source = "bookId")
     BookLoan toEntity(BookLoanDto dto);
+
+    // Для обновления существующего entity
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateBookLoanFromDto(BookLoanDto dto, @MappingTarget BookLoan entity);
 }
