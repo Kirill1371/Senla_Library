@@ -12,6 +12,13 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:changelog-master.yaml
+  jdbc:
+    template:
+      fetch-size: 100
+      max-rows: 1000
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
 
 logging:
   level:
@@ -20,3 +27,15 @@ logging:
     org.springframework.security: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springdoc: DEBUG
+    org.springframework.web: DEBUG
+
+springdoc:
+  api-docs.enabled: true
+  swagger-ui.enabled: true
+
+  springdoc.swagger-ui.path: /swagger-ui.html
+  springdoc.swagger-ui.enabled: true
+  springdoc.api-docs.path: /v3/api-docs
+  springdoc.swagger-ui.url: /v3/api-docs
+  springdoc.swagger-ui.configUrl: /v3/api-docs/swagger-config
