@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages = {
         "com.lib.library.api",
         "com.lib.library.impl.Controller",
-        "com.lib.library.impl.Security",
+        "com.lib.library.impl.security",
         "com.lib.library.impl.Config",
         "com.lib.library.impl.Service",
         "com.lib.library.impl.Repository",

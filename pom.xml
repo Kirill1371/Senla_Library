@@ -46,6 +46,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-tomcat</artifactId>
         <version>${spring.boot.version}</version>
+        <scope>provided</scope>
       </dependency>
       <!-- MapStruct -->
       <dependency>
@@ -309,6 +310,53 @@
           </annotationProcessorPaths>
         </configuration>
       </plugin>
+      <!-- Плагин для создания fat jar -->
+<!--      <plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-assembly-plugin</artifactId>-->
+<!--        <version>3.6.0</version>-->
+<!--        <configuration>-->
+<!--          <descriptorRefs>-->
+<!--            <descriptorRef>jar-with-dependencies</descriptorRef>-->
+<!--          </descriptorRefs>-->
+<!--          <archive>-->
+<!--            <manifest>-->
+<!--              <mainClass>com.lib.library.impl.App</mainClass> &lt;!&ndash; Укажите ваш главный класс &ndash;&gt;-->
+<!--            </manifest>-->
+<!--          </archive>-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <phase>package</phase>-->
+<!--            <goals>-->
+<!--              <goal>single</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
+<!--      <plugin>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--        <version>${spring.boot.version}</version>-->
+<!--        <configuration>-->
+<!--          <mainClass>com.lib.library.impl.App</mainClass> &lt;!&ndash; Укажите ваш главный класс &ndash;&gt;-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <goals>-->
+<!--              <goal>repackage</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
+<!--      <plugin>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--        <configuration>-->
+<!--          <mainClass>com.lib.library.impl.App</mainClass>-->
+<!--          <classifier>exec</classifier> &lt;!&ndash; Добавить классификатор &ndash;&gt;-->
+<!--        </configuration>-->
+<!--      </plugin>-->
     </plugins>
   </build>
 
