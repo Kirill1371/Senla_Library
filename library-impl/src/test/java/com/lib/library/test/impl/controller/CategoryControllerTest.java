@@ -2,9 +2,9 @@ package com.lib.library.test.impl.controller;
 
 import com.lib.library.api.dto.CategoryDto;
 import com.lib.library.db.entity.Staff;
-import com.lib.library.impl.Controller.CategoryControllerImpl;
-import com.lib.library.impl.Service.CategoryService;
-import com.lib.library.impl.Service.impl.UserDetailsServiceImpl;
+import com.lib.library.impl.controller.CategoryControllerImpl;
+import com.lib.library.impl.service.CategoryService;
+import com.lib.library.impl.service.impl.UserDetailsServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;

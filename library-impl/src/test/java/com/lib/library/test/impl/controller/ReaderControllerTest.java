@@ -2,11 +2,11 @@ package com.lib.library.test.impl.controller;
 
 import com.lib.library.api.dto.*;
 import com.lib.library.db.entity.Reader;
-import com.lib.library.impl.Controller.ReaderControllerImpl;
-import com.lib.library.impl.Service.BookLoanService;
-import com.lib.library.impl.Service.ReaderAuthService;
-import com.lib.library.impl.Service.ReaderService;
-import com.lib.library.impl.Service.impl.UserDetailsServiceImpl;
+import com.lib.library.impl.controller.ReaderControllerImpl;
+import com.lib.library.impl.service.BookLoanService;
+import com.lib.library.impl.service.ReaderAuthService;
+import com.lib.library.impl.service.ReaderService;
+import com.lib.library.impl.service.impl.UserDetailsServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

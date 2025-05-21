@@ -2,9 +2,9 @@ package com.lib.library.test.impl.service;
 
 import com.lib.library.api.dto.CategoryDto;
 import com.lib.library.db.entity.Category;
-import com.lib.library.impl.Repository.CategoryRepository;
-import com.lib.library.impl.Repository.StaffRepository;
-import com.lib.library.impl.Service.impl.CategoryServiceImpl;
+import com.lib.library.impl.repository.CategoryRepository;
+import com.lib.library.impl.repository.StaffRepository;
+import com.lib.library.impl.service.impl.CategoryServiceImpl;
 import com.lib.library.impl.mapper.CategoryMapper;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;

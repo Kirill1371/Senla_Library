@@ -1,9 +1,9 @@
 package com.lib.library.test.impl.controller;
 
 import com.lib.library.api.dto.AuthorDto;
-import com.lib.library.impl.Controller.AuthorControllerImpl;
-import com.lib.library.impl.Service.AuthorService;
-import com.lib.library.impl.Service.impl.UserDetailsServiceImpl;
+import com.lib.library.impl.controller.AuthorControllerImpl;
+import com.lib.library.impl.service.AuthorService;
+import com.lib.library.impl.service.impl.UserDetailsServiceImpl;
 import com.lib.library.db.entity.Staff;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

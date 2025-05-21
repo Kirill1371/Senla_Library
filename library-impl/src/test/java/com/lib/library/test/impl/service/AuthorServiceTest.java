@@ -2,9 +2,9 @@ package com.lib.library.test.impl.service;
 
 import com.lib.library.api.dto.AuthorDto;
 import com.lib.library.db.entity.Author;
-import com.lib.library.impl.Repository.AuthorRepository;
-import com.lib.library.impl.Repository.StaffRepository;
-import com.lib.library.impl.Service.impl.AuthorServiceImpl;
+import com.lib.library.impl.repository.AuthorRepository;
+import com.lib.library.impl.repository.StaffRepository;
+import com.lib.library.impl.service.impl.AuthorServiceImpl;
 import com.lib.library.impl.mapper.AuthorMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

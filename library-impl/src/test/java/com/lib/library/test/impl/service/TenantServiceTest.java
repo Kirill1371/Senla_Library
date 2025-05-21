@@ -2,8 +2,8 @@ package com.lib.library.test.impl.service;
 
 import com.lib.library.api.dto.TenantDto;
 import com.lib.library.db.entity.Tenant;
-import com.lib.library.impl.Repository.TenantRepository;
-import com.lib.library.impl.Service.impl.TenantServiceImpl;
+import com.lib.library.impl.repository.TenantRepository;
+import com.lib.library.impl.service.impl.TenantServiceImpl;
 import com.lib.library.impl.mapper.TenantMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

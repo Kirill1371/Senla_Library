@@ -1,8 +1,8 @@
 package com.lib.library.test.impl.controller;
 
 import com.lib.library.api.dto.BookLoanDto;
-import com.lib.library.impl.Service.BookLoanService;
-import com.lib.library.impl.Controller.BookLoanControllerImpl;
+import com.lib.library.impl.service.BookLoanService;
+import com.lib.library.impl.controller.BookLoanControllerImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

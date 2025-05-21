@@ -2,8 +2,8 @@ package com.lib.library.test.impl.service;
 
 import com.lib.library.api.dto.ReaderDto;
 import com.lib.library.db.entity.Reader;
-import com.lib.library.impl.Repository.ReaderRepository;
-import com.lib.library.impl.Service.impl.ReaderServiceImpl;
+import com.lib.library.impl.repository.ReaderRepository;
+import com.lib.library.impl.service.impl.ReaderServiceImpl;
 import com.lib.library.impl.mapper.ReaderMapper;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;

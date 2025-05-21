@@ -1,8 +1,8 @@
 package com.lib.library.test.impl.controller;
 
 import com.lib.library.api.dto.StaffDto;
-import com.lib.library.impl.Controller.StaffControllerImpl;
-import com.lib.library.impl.Service.StaffService;
+import com.lib.library.impl.controller.StaffControllerImpl;
+import com.lib.library.impl.service.StaffService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

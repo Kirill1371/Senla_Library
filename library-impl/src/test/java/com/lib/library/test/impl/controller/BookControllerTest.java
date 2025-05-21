@@ -2,8 +2,8 @@ package com.lib.library.test.impl.controller;
 
 
 import com.lib.library.api.dto.BookDto;
-import com.lib.library.impl.Service.BookService;
-import com.lib.library.impl.Controller.BookControllerImpl;
+import com.lib.library.impl.service.BookService;
+import com.lib.library.impl.controller.BookControllerImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;

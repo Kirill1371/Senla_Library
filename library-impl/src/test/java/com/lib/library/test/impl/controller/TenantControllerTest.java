@@ -1,7 +1,7 @@
 package com.lib.library.test.impl.controller;
 import com.lib.library.api.dto.TenantDto;
-import com.lib.library.impl.Controller.TenantControllerImpl;
-import com.lib.library.impl.Service.TenantService;
+import com.lib.library.impl.controller.TenantControllerImpl;
+import com.lib.library.impl.service.TenantService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
